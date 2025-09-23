@@ -29,7 +29,7 @@ function Sidebar() {
             Products
           </Link>
 
-          {/* Vendor Dashboard */}
+          {/* Vendor Dashboard (requires role) */}
           {session?.user?.role === "vendor" && (
             <Link
               href="/vendor/dashboard"
@@ -39,7 +39,7 @@ function Sidebar() {
             </Link>
           )}
 
-          {/* Sign In / Sign Out */}
+          {/* Auth controls */}
           {session ? (
             <button
               onClick={() => signOut()}
@@ -49,8 +49,8 @@ function Sidebar() {
             </button>
           ) : (
             <Link
-              href="/auth/signin"
-              className="px-3 py-2 rounded bg-blue-600 text-white hover:bg-blue-700"
+              href="/signin"
+              className="px-3 py-2 rounded bg-green-600 text-white hover:bg-green-700 text-center"
             >
               Sign In
             </Link>
@@ -72,7 +72,7 @@ function TopNav() {
         />
         <button
           type="submit"
-          className="absolute right-2 top-1/2 -translate-y-1/2 text-gray-600 hover:text-green-600"
+          className="absolute right-2 top-1/2 -translate-y-1/2 text-gray-600 hover:text-green-200"
         >
           🔍
         </button>
@@ -86,10 +86,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
     <html lang="en">
       <body className="min-h-screen bg-gray-50 flex flex-col">
         <SessionProvider>
-          {/* Top Nav spans full width */}
           <TopNav />
-
-          {/* Sidebar and main content */}
           <div className="flex flex-1">
             <Sidebar />
             <main className="flex-1 p-6">{children}</main>
